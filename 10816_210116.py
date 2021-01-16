@@ -5,6 +5,7 @@ check = sorted(map(int,input().split()))
 m=sys.stdin.readline()
 L=list(map(int,input().split()))
 dic={}
+
 for x in check :
   if x in dic :
     dic[x] +=1
