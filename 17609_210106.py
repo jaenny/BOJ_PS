@@ -1,24 +1,22 @@
-import sys
-t = int(sys.stdin.readline())
-cnt = 0
-for i in range(t) :
-  cnt = 0
-  s=list(map(str,sys.stdin.readline()))
+def pal(s) :
   check = s.copy()
   check.reverse()
   if s == check :
+    return 1
+  else :
+    return 0
+
+t = int(input())
+for i in range(t) :
+  s=list(map(str,input()))
+  if pal(s) == 1 : #펠린드롬인지 체크
     print(0)
   else :
     for i in range(len(s)//2) :
-      if s[i] == s[len(s)-1-i] :
-        continue
-      else :
-        if s[i] == s[len(s)-2-i] :
-          s.pop(s.index(s[len(s)-1-i]))
-          cnt += 1 
-        elif s[i+1] == s[len(s)-1-i] :
-          s.pop(s.index(s[i]))
-          cnt += 1 
-        else : cnt +=2
-  if cnt == 1 :print(1)
-  elif cnt != 0 : print(2)
+      if s[i] != s[len(s)-1-i] : #양 끝이 달라지는 부분 체크
+        break
+    if pal(s[i+1:len(s)-i]) == 1 : #왼쪽에서 하나 떼고 펠린드롬인지 체크 --> 맞다면 유사회문
+      print(1)
+    elif pal(s[i:len(s)-i-1]) == 1 : #오른쪽에서 하나 떼고 펠린드롬인지 체크 --> 맞다면 유사회문
+      print(1)
+    else : print(2) #둘 다 아닌 경우
